@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script defer src="index.js"></script>
+    </head>
+
+    <body>
+            <form class='form-add'>
+                <input placeholder='№ абон-та' class='inpt abon-num' type='text'>
+                <input placeholder='ФИО' class='inpt abon-name' type='text'>
+                <input placeholder='Вид абон-та' class='inpt abon-type' type='text'>
+                <input placeholder='Срок действия' class='inpt abon-dur' type='text'>
+                <input placeholder='Сумма' class='inpt abon-summ' type='text'>
+                <input placeholder='Примечания' class='inpt abon-desc' type='text'>
+                <button class='btn abon'>Добавить</button>
+            </form>
+
+            <form class='form-add'>
+                <input placeholder='Товар' class='inpt goods-item' type='text'>
+                <input placeholder='Кол-во' class='inpt goods-count' type='text'>
+                <input placeholder='Цена' class='inpt goods-price' type='text'>
+                <button class='btn goods'>Добавить</button>
+            </form>
+        <main>
+            <div class='half'>
+                <table style='width: 100%' class='pass'>
+                    <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>№ абон-та</th>
+                            <th>ФИО</th>
+                            <th>Вид абон-та</th>
+                            <th>ДАТА</th>
+                            <th>СРОК действия</th>
+                            <th>Сумма</th>
+                            <th>Примечания</th>
+                            <th>Время</th>
+                        </tr>
+                    </thead>
+                    <tr class='summary'>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Итого:</td>
+                        <td>0</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div class='half'>
+                    <table style='margin-left: 10px;' class='goods-table'>
+                            <thead>
+                                    <tr>
+                                        <th>№</th>
+                                        <th>Товар</th>
+                                        <th>Кол-во</th>
+                                        <th>Цена</th>
+                                        <th>Время</th>
+                                    </tr>
+                            </thead>
+                            <tr>
+                                <td>1</td>
+                                <td>Тест Иван иванов</td>
+                                <td>3500</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+            </div>
+        </main>
+    </body>
+</html>
