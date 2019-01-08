@@ -15,7 +15,7 @@ app.get('/api/abon', async (request, response) => {
 app.post('/api/abon', (request, response) => {
     const state = request.body;
 
-    setStateAbon(state)
+    setStateAbon(state, '/abon.json')
 });
 
 app.get('/api/goods', async (request, response) => {
@@ -27,7 +27,7 @@ app.get('/api/goods', async (request, response) => {
 app.post('/api/goods', (request, response) => {
     const state = request.body;
 
-    setStateGoods(state)
+    setStateGoods(state, '/goods.json')
 });
 
 var port = process.env.PORT || 5000;
@@ -41,8 +41,8 @@ async function getStateGoods() {
     return state;
 }
 
-async function setStateGoods(data) {
-    writeFile(__dirname.concat('/data.json'), JSON.stringify(state));
+async function setStateGoods(data, path) {
+    writeFile(__dirname.concat(path), JSON.stringify(data));
 }
 
 async function getStateAbon() {
@@ -51,8 +51,8 @@ async function getStateAbon() {
     return state;
 }
 
-async function setStateAbon(data) {
-    writeFile(__dirname.concat('/data.json'), JSON.stringify(state));
+async function setStateAbon(data, path) {
+    writeFile(__dirname.concat(path), JSON.stringify(data));
 }
 
 readFile: (path) => {
