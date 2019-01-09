@@ -71,7 +71,7 @@ async function setStateAbon(data, path) {
     return writeFile(__dirname.concat(path), JSON.stringify(data));
 }
 
-function readFile(path) {
+async function readFile(path) {
     return new Promise((resolve, reject) => {
         fs.readFile(path, 'utf8', (err, data) => {
             data ? resolve(data) : reject(err);
