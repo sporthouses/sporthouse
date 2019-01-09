@@ -12,14 +12,15 @@ app.use(express.static(__dirname + '/'));
 app.get('/api/abon', async (request, response) => {
     const state = await getStateAbon();
 
-    response.send(state);
+    // response.send(state);
+    response.status(200).json(state);
 });
 
 app.post('/api/abon', (request, response) => {
     const state = request.body;
 
     try {
-        setStateAbon(state, '/abon.json');
+        res.status(201).json(setStateAbon(state, '/abon.json'));
     } catch (error) {
         console.log(error);
     };
@@ -28,14 +29,15 @@ app.post('/api/abon', (request, response) => {
 app.get('/api/goods', async (request, response) => {
     const state = await getStateGoods();
 
-    response.send(state);
+    // response.send(state);
+    response.status(200).json(state);
 });
 
 app.post('/api/goods', (request, response) => {
     const state = request.body;
 
     try {
-        setStateGoods(state, '/goods.json');
+        res.status(201).json(setStateGoods(state, '/goods.json'));
     } catch (error) {
         console.log(error);
     };
@@ -53,7 +55,7 @@ async function getStateGoods() {
 }
 
 async function setStateGoods(data, path) {
-    writeFile(__dirname.concat(path), JSON.stringify(data));
+    return writeFile(__dirname.concat(path), JSON.stringify(data));
 }
 
 async function getStateAbon() {
@@ -63,7 +65,7 @@ async function getStateAbon() {
 }
 
 async function setStateAbon(data, path) {
-    writeFile(__dirname.concat(path), JSON.stringify(data));
+    return writeFile(__dirname.concat(path), JSON.stringify(data));
 }
 
 function readFile(path) {

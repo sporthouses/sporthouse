@@ -60,7 +60,7 @@ function getAllSumms() {
         summ.goodsSumm += parseFloat(item.summ);
     });
 
-    summ.totalSumm = summ.goodsSumm + summ.abonSumm;
+    summ.totalSumm = parseFloat(summ.goodsSumm) + parseFloat(summ.abonSumm);
 
     summ.abonSumm = Number.isNaN(summ.abonSumm) ? '0' : summ.abonSumm;
     summ.goodsSumm = Number.isNaN(summ.goodsSumm) ? '0' : summ.goodsSumm;
@@ -178,6 +178,9 @@ async function getGoodsData() {
     return fetch('https://sporthouses.herokuapp.com/api/goods')
     .then(data => {
         return data.json();
+    })
+    .catch(err => {
+        console.log(err);
     });
 }
 
@@ -192,6 +195,9 @@ function sendGoodsData(data) {
         method: 'POST',
         body: dataJSN
     })
+    .catch(err => {
+        console.log(err);
+    });
 }
 
 function sendAbonData(data) {
@@ -205,12 +211,18 @@ function sendAbonData(data) {
         method: 'POST',
         body: dataJSN
     })
+    .catch(err => {
+        console.log(err);
+    });
 }
 
 async function getAbonData() {
     return fetch('https://sporthouses.herokuapp.com/api/abon')
     .then(data => {
         return data.json();
+    })
+    .catch(err => {
+        console.log(err);
     });
 };
 
@@ -246,6 +258,38 @@ async function initTables() {
     });
 
     showSumm();
+}
+
+function resetAbon() {
+    const dataJSN = JSON.stringify([]);
+
+    fetch('https://sporthouses.herokuapp.com/api/abon', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: dataJSN
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
+
+function resetGoods() {
+    const dataJSN = JSON.stringify([]);
+
+    fetch('https://sporthouses.herokuapp.com/api/goods', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: dataJSN
+    })
+    .catch(err => {
+        console.log(err);
+    });
 }
 
 (function() {
