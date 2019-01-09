@@ -57,7 +57,7 @@ function getAllSumms() {
     });
 
     goods.forEach((item) => {
-        summ.goodsSumm += parseFloat(item.summ);
+        summ.goodsSumm += parseFloat(item.price);
     });
 
     summ.totalSumm = parseFloat(summ.goodsSumm) + parseFloat(summ.abonSumm);
@@ -175,7 +175,14 @@ function addGoods(rowId, data) {
 // }
 
 async function getGoodsData() {
-    return fetch('https://sporthouses.herokuapp.com/api/goods')
+    return fetch('https://sporthouses.herokuapp.com/api/goods',{
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET'
+    })
     .then(data => {
         return data.json();
     })
@@ -192,6 +199,7 @@ function sendGoodsData(data) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
+        mode: 'cors',
         method: 'POST',
         body: dataJSN
     })
@@ -208,6 +216,7 @@ function sendAbonData(data) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
+        mode: 'cors',
         method: 'POST',
         body: dataJSN
     })
@@ -217,7 +226,15 @@ function sendAbonData(data) {
 }
 
 async function getAbonData() {
-    return fetch('https://sporthouses.herokuapp.com/api/abon')
+    return fetch('https://sporthouses.herokuapp.com/api/abon',
+    {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET'
+    })
     .then(data => {
         return data.json();
     })
@@ -268,6 +285,7 @@ function resetAbon() {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
+        mode: 'cors',
         method: 'POST',
         body: dataJSN
     })
@@ -284,6 +302,7 @@ function resetGoods() {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
+        mode: 'cors',
         method: 'POST',
         body: dataJSN
     })

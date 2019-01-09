@@ -3,11 +3,13 @@ var app = express();
 const cors = require('cors');
 const fs = require('fs');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(express.logger());
 app.use(cors());
 app.options('*', cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static(__dirname + '/'));
 
 app.get('/api/abon', async (request, response) => {
@@ -17,12 +19,11 @@ app.get('/api/abon', async (request, response) => {
     response.status(200).json(state);
 });
 
-app.post('/api/abon', async (request, response) => {
+app.post('/api/abon', (request, response) => {
     const state = request.body;
 
     try {
-        const result = await setStateAbon(state, '/abon.json');
-        response.status(200).json(result);
+        response.status(200).json(setStateAbon(state, '/abon.json'));
     } catch (error) {
         console.log(error);
     };
@@ -35,12 +36,11 @@ app.get('/api/goods', async (request, response) => {
     response.status(200).json(state);
 });
 
-app.post('/api/goods', async (request, response) => {
+app.post('/api/goods', (request, response) => {
     const state = request.body;
 
     try {
-        const result = await setStateGoods(state, '/goods.json');
-        response.status(200).json(result);
+        response.status(200).json(setStateGoods(state, '/goods.json'));
     } catch (error) {
         console.log(error);
     };
@@ -52,7 +52,7 @@ app.listen(port, function() {
 });
 
 async function getStateGoods() {
-    const state = await readFile(__dirname.concat('/goods.json'));
+    const state = await readFile(__dirname.concat('/goods.json')).catch((err) => console.log(err));
 
     return state;
 }
@@ -62,7 +62,7 @@ async function setStateGoods(data, path) {
 }
 
 async function getStateAbon() {
-    const state = await readFile(__dirname.concat('/abon.json'));
+    const state = await readFile(__dirname.concat('/abon.json')).catch((err) => console.log(err));
 
     return state;
 }
@@ -71,18 +71,20 @@ async function setStateAbon(data, path) {
     return writeFile(__dirname.concat(path), JSON.stringify(data));
 }
 
-async function readFile(path) {
+function readFile(path) {
     return new Promise((resolve, reject) => {
         fs.readFile(path, 'utf8', (err, data) => {
-            data ? resolve(data) : reject(err);
+            data ? resolve(JSON.parse(data)) : reject(err);
         });
     })
 };
 
 function writeFile(name, file) {
     return new Promise((resolve, reject) => {
-        fs.writeFile(name, file, 'utf8', (err, data) => {
-            data ? resolve(data) : reject(err);
+        fs.writeFile(name, file, 'utf8', (err) => {
+            if (err) {
+                reject(err);
+            }
         });
     })
 };
