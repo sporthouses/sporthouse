@@ -21,7 +21,7 @@ app.post('/api/abon', (request, response) => {
     const state = request.body;
 
     try {
-        response.status(201).json(setStateAbon(state, '/abon.json'));
+        response.status(200).json(setStateAbon(state, '/abon.json'));
     } catch (error) {
         console.log(error);
     };
@@ -38,7 +38,7 @@ app.post('/api/goods', (request, response) => {
     const state = request.body;
 
     try {
-        response.status(201).json(setStateGoods(state, '/goods.json'));
+        response.status(200).json(setStateGoods(state, '/goods.json'));
     } catch (error) {
         console.log(error);
     };
@@ -72,6 +72,7 @@ async function setStateAbon(data, path) {
 function readFile(path) {
     return new Promise((resolve, reject) => {
         fs.readFile(path, 'utf8', (err, data) => {
+            data = JSON.stringify(data);
             data ? resolve(JSON.parse(data)) : reject(err);
         });
     })
