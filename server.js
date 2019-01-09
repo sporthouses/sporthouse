@@ -56,7 +56,7 @@ async function getStateGoods() {
 }
 
 async function setStateGoods(data, path) {
-    return writeFile(__dirname.concat(path), JSON.stringify(data));
+    return writeFile(__dirname.concat(path), data);
 }
 
 async function getStateAbon() {
@@ -66,7 +66,7 @@ async function getStateAbon() {
 }
 
 async function setStateAbon(data, path) {
-    return writeFile(__dirname.concat(path), JSON.stringify(data));
+    return writeFile(__dirname.concat(path), data);
 }
 
 function readFile(path) {
