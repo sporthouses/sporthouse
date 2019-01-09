@@ -21,7 +21,8 @@ app.post('/api/abon', (request, response) => {
     const state = request.body;
 
     try {
-        response.status(200).json(setStateAbon(state, '/abon.json'));
+        const result = await setStateAbon(state, '/abon.json');
+        response.status(200).json(result);
     } catch (error) {
         console.log(error);
     };
@@ -38,7 +39,8 @@ app.post('/api/goods', (request, response) => {
     const state = request.body;
 
     try {
-        response.status(200).json(setStateGoods(state, '/goods.json'));
+        const result = await setStateGoods(state, '/goods.json');
+        response.status(200).json(result);
     } catch (error) {
         console.log(error);
     };
@@ -79,10 +81,8 @@ function readFile(path) {
 
 function writeFile(name, file) {
     return new Promise((resolve, reject) => {
-        fs.writeFile(name, file, 'utf8', (err) => {
-            if (err) {
-                reject(err);
-            }
+        fs.writeFile(name, file, 'utf8', (err, data) => {
+            data ? resolve(data) : reject(err);
         });
     })
 };
