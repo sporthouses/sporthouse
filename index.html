@@ -2,9 +2,19 @@
     <head>
         <link rel="stylesheet" type="text/css" href="style.css">
         <script defer src="index.js"></script>
+        <title>SportHouse</title>
+        <link rel="icon" type="image/ico" href="logo.png" />
     </head>
 
     <body>
+            <div class='total-summ'>
+                <span>Абонементы:</span>
+                <div class='total-summ-abon'></div>
+                <span>Спортивное питание:</span>
+                <div class='total-summ-goods'></div>
+                <span>За весь день:</span>
+                <div class='total-summ-total'></div>
+            </div>
             <form class='form-add'>
                 <input placeholder='№ абон-та' class='inpt abon-num' type='text'>
                 <input placeholder='ФИО' class='inpt abon-name' type='text'>
@@ -37,17 +47,7 @@
                             <th>Время</th>
                         </tr>
                     </thead>
-                    <tr class='summary'>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Итого:</td>
-                        <td>0</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <tbody></tbody>
                 </table>
             </div>
             <div class='half'>
@@ -61,13 +61,7 @@
                                         <th>Время</th>
                                     </tr>
                             </thead>
-                            <tr>
-                                <td>1</td>
-                                <td>Тест Иван иванов</td>
-                                <td>3500</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            <tbody></tbody>
                         </table>
             </div>
         </main>

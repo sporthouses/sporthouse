@@ -129,3 +129,22 @@ thead tr th
     font-weight: unset;
 
 }
+
+.total-summ
+{
+    display: flex;
+    margin: auto;
+    width: 500px;
+    border-radius: 10px;
+    background: rgb(54, 48, 74);
+    color: white;
+    padding: 10px;
+    justify-content: space-evenly;
+    font-family: 'OpenSans-Regular';
+    font-size: 18px;
+}
+
+.total-summ div
+{
+    margin-right: 5px;
+}

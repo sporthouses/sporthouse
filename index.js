@@ -6,13 +6,70 @@ var globalTable = {
     abon: []
 };
 
-function getAllValues() {
-    const table = document.querySelector('.pass');
+function showSumm() {
+    const summ = getAllSumms();
+    const abon = document.querySelector('.total-summ-abon');
+    const goods = document.querySelector('.total-summ-goods');
+    const total = document.querySelector('.total-summ-total');
 
-console.log(obj)
+    abon.textContent = summ.abonSumm;
+    goods.textContent = summ.goodsSumm;
+    total.textContent = summ.totalSumm;
 }
 
-function addUser() {
+function clearAbon() {
+    const name = document.querySelector('.abon-name');
+    const type = document.querySelector('.abon-type');
+    const num = document.querySelector('.abon-num');
+    const dur = document.querySelector('.abon-dur');
+    const summ = document.querySelector('.abon-summ');
+    const desc = document.querySelector('.abon-desc');
+
+    name.value = '';
+    type.value = '';
+    num.value = '';
+    dur.value = '';
+    summ.value = '';
+    desc.value = '';
+}
+
+function clearGoods() {
+    const item = document.querySelector('.goods-item');
+    const count = document.querySelector('.goods-count');
+    const price = document.querySelector('.goods-price');
+
+    item.value = '';
+    count.value = '';
+    price.value = '';
+}
+
+function getAllSumms() {
+    const abons = globalTable.abon;
+    const goods = globalTable.goods;
+    var summ = {
+        abonSumm: 0,
+        goodsSumm: 0,
+        totalSumm: 0
+    };
+
+    abons.forEach((item) => {
+        summ.abonSumm += parseFloat(item.summ);
+    });
+
+    goods.forEach((item) => {
+        summ.goodsSumm += parseFloat(item.summ);
+    });
+
+    summ.totalSumm = summ.goodsSumm + summ.abonSumm;
+
+    summ.abonSumm = Number.isNaN(summ.abonSumm) ? '0' : summ.abonSumm;
+    summ.goodsSumm = Number.isNaN(summ.goodsSumm) ? '0' : summ.goodsSumm;
+    summ.totalSumm = Number.isNaN(summ.totalSumm) ? '0' : summ.totalSumm;
+
+    return summ;
+}
+
+function addUser(rowId, data) {
     const name = document.querySelector('.abon-name');
     const abonemNum = document.querySelector('.abon-num');
     const abonemType = document.querySelector('.abon-type');
@@ -35,23 +92,23 @@ function addUser() {
     const monthNames = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня","Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"];
     var rowData = {};
     
-    nameCell.textContent = rowData.fio = name.value;
-    summCell.textContent = rowData.summ = summ.value;
-    numCell.textContent = rowData.abonNum = abonemNum.value;
-    typeCell.textContent = rowData.abonType = abonemType.value;
-    descCell.textContent = rowData.desc = abonemDesc.value;
-    durationCell.textContent = rowData.duration = abonemDuration.value;
-    dateCell.textContent = rowData.date = `${time.getDate()} ${monthNames[time.getMonth()]}`;
-    timeCell.textContent = rowData.time = `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
-    numberCell.textContent = daySumm.length + 1;
+    nameCell.textContent = rowData.fio = data ? data.fio : name.value;
+    summCell.textContent = rowData.summ = data ? data.summ : summ.value;
+    numCell.textContent = rowData.abonNum = data ? data.abonNum : abonemNum.value;
+    typeCell.textContent = rowData.abonType = data ? data.abonType : abonemType.value;
+    descCell.textContent = rowData.desc = data ? data.desc : abonemDesc.value;
+    durationCell.textContent = rowData.duration = data ? data.duration : abonemDuration.value;
+    dateCell.textContent = rowData.date = data ? data.date : `${time.getDate()} ${monthNames[time.getMonth()]}`;
+    timeCell.textContent = rowData.time = data ? data.time : `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+    numberCell.textContent = rowId;
 
-    daySumm.push(parseInt(summ.value));
+    // daySumm.push(parseInt(summ.value));
 
-    var summNumber =  0;
+    // var summNumber =  0;
     
-    for(let i = 0; i < daySumm.length; i++) {
-        summNumber += daySumm[i];
-    }
+    // for(let i = 0; i < daySumm.length; i++) {
+    //     summNumber += daySumm[i];
+    // }
     // summary.children[summary.children.length - 1].textContent = summNumber;
 
     row.appendChild(numberCell);
@@ -64,12 +121,12 @@ function addUser() {
     row.appendChild(descCell);
     row.appendChild(timeCell);
 
-    globalTable.abon.push(rowData);
+    data ? null : globalTable.abon.push(rowData);
 
     return row;
 }
 
-function addGoods(rowId) {
+function addGoods(rowId, data) {
     const goodsName = document.querySelector('.goods-item');
     const goodsPrice = document.querySelector('.goods-price');
     const goodsCount = document.querySelector('.goods-count');
@@ -83,10 +140,10 @@ function addGoods(rowId) {
     var rowData = {};
 
     numberCell.textContent = rowId;
-    timeCell.textContent = rowData.time = `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
-    nameCell.textContent = rowData.goodsName = goodsName.value;
-    countCell.textContent = rowData.count = goodsCount.value;
-    priceCell.textContent = rowData.price = goodsPrice.value;
+    timeCell.textContent = rowData.time = data ? data.time : `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+    nameCell.textContent = rowData.goodsName = data ? data.goodsName : goodsName.value;
+    countCell.textContent = rowData.count = data ? data.count : goodsCount.value;
+    priceCell.textContent = rowData.price = data ? data.price : goodsPrice.value;
 
     row.appendChild(numberCell);
     row.appendChild(nameCell);
@@ -94,7 +151,7 @@ function addGoods(rowId) {
     row.appendChild(priceCell);
     row.appendChild(timeCell);
 
-    globalTable.goods.push(rowData);
+    data ? null : globalTable.goods.push(rowData);
 
     return row;
 }
@@ -157,57 +214,84 @@ async function getAbonData() {
     });
 };
 
-function addAbonRow() {
+function addAbonRow(data) {
     const table = document.querySelector('.pass tbody');
-    const summary = document.querySelector('.summary');
-    const name = document.querySelector('.abon-name');
-    const summ = document.querySelector('.abon-summ');
-    var firstTime = true;
 
-    // firstTime ? table.children[1].removeChild(summary) : table.removeChild(summary);
-    table.appendChild(addUser());
+    table.appendChild(addUser(table.rows.length + 1, data));
 
-    // var summNumber =  0;
-
-    // for(let i = 0; i < daySumm.length; i++) {
-    //     summNumber += daySumm[i];
-    // }
-    // summary.children[summary.children.length - 1].textContent = summNumber;
-
-    // table.appendChild(summary);
-    firstTime = false;
-    name.value = '';
-    summ.value = '';
+    clearAbon();
 }
 
-function addGoodsRow() {
+function addGoodsRow(data) {
     const table = document.querySelector('.goods-table tbody');
 
-    table.appendChild(addGoods(table.rows.length + 1));
+    table.appendChild(addGoods(table.rows.length + 1, data));
+
+    clearGoods();
 }
 
-// function initTables() {
-//     const abonData = await getAbonData();
-//     const goodsData = await getGoodsData();
+async function initTables() {
+    const abonData = await getAbonData();
+    const goodsData = await getGoodsData();
 
-//     globalTable.abon = abonData;
-//     globalTable.goods = goodsData;
+    globalTable.abon = abonData;
+    globalTable.goods = goodsData;
 
-// }
+    abonData.forEach((item) => {
+        addAbonRow(item);
+    });
+
+    goodsData.forEach((item) => {
+        addGoodsRow(item);
+    });
+
+    showSumm();
+}
 
 (function() {
     const abonButton = document.querySelector('.abon');
     const goodsButton = document.querySelector('.goods');
-    const table = document.querySelector('.pass');
-    const summary = document.querySelector('.summary');
-    const name = document.querySelector('.name');
-    const summ = document.querySelector('.summ');
-    var firstTime = true;
+    const summ = document.querySelector('.abon-summ');
+    const count = document.querySelector('.goods-count');
+    const price = document.querySelector('.goods-price');
+
+    summ.onkeypress = (evt) => {
+        var e = event || evt;
+        var charCode = e.which || e.keyCode;
+
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    };
+
+    count.onkeypress = (evt) => {
+        var e = event || evt;
+        var charCode = e.which || e.keyCode;
+
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    };
+
+    price.onkeypress = (evt) => {
+        var e = event || evt;
+        var charCode = e.which || e.keyCode;
+
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    };
+
+    initTables();
 
     abonButton.onclick = (e) => {
         e.preventDefault();
 
         addAbonRow();
+        showSumm();
         sendAbonData(globalTable.abon);
     };
 
@@ -215,6 +299,7 @@ function addGoodsRow() {
         e.preventDefault();
 
         addGoodsRow();
+        showSumm();
         sendGoodsData(globalTable.goods);
     };
 })();
