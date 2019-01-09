@@ -4,7 +4,10 @@ const cors = require('cors');
 const fs = require('fs');
 
 app.use(express.logger());
-app.use(cors());
+app.use(cors({origin: '*'}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
 
 app.get('/api/abon', async (request, response) => {
     const state = await getStateAbon();
