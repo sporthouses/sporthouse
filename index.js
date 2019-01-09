@@ -57,7 +57,7 @@ function getAllSumms() {
     });
 
     goods.forEach((item) => {
-        summ.goodsSumm += parseFloat(item.price);
+        summ.goodsSumm += parseFloat(item.price) * parseFloat(item.count);
     });
 
     summ.totalSumm = parseFloat(summ.goodsSumm) + parseFloat(summ.abonSumm);

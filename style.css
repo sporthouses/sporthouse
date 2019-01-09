@@ -60,13 +60,20 @@ main
 
 .btn:hover
 {
-    transform: translateY(4px);
-    transition: 0.4s all ease;
+    text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.4s ease 0s;
 }
 
-.half
+.left
 {
-    width: 50%;
+    width: 75%;
+}
+
+.right
+{
+    width: 25%;
 }
 
 table
@@ -147,4 +154,10 @@ thead tr th
 .total-summ div
 {
     margin-right: 5px;
+}
+
+.forms
+{
+    display: flex;
+    justify-content: space-evenly;
 }
