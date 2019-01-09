@@ -21,7 +21,7 @@ app.post('/api/abon', (request, response) => {
     const state = request.body;
 
     try {
-        res.status(201).json(setStateAbon(state, '/abon.json'));
+        response.status(201).json(setStateAbon(state, '/abon.json'));
     } catch (error) {
         console.log(error);
     };
@@ -38,7 +38,7 @@ app.post('/api/goods', (request, response) => {
     const state = request.body;
 
     try {
-        res.status(201).json(setStateGoods(state, '/goods.json'));
+        response.status(201).json(setStateGoods(state, '/goods.json'));
     } catch (error) {
         console.log(error);
     };
