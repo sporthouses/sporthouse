@@ -4,7 +4,8 @@ const cors = require('cors');
 const fs = require('fs');
 
 app.use(express.logger());
-app.use(cors({origin: '*'}));
+app.use(cors());
+app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/'));
