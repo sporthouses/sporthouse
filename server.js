@@ -17,7 +17,7 @@ app.get('/api/abon', async (request, response) => {
     response.status(200).json(state);
 });
 
-app.post('/api/abon', (request, response) => {
+app.post('/api/abon', async (request, response) => {
     const state = request.body;
 
     try {
@@ -35,7 +35,7 @@ app.get('/api/goods', async (request, response) => {
     response.status(200).json(state);
 });
 
-app.post('/api/goods', (request, response) => {
+app.post('/api/goods', async (request, response) => {
     const state = request.body;
 
     try {
