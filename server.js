@@ -12,25 +12,33 @@ app.use(express.static(__dirname + '/public'));
 app.get('/api/abon', async (request, response) => {
     const state = await getStateAbon();
 
-    response.send(state)
+    response.send(state);
 });
 
 app.post('/api/abon', (request, response) => {
     const state = request.body;
 
-    setStateAbon(state, '/abon.json')
+    try {
+        setStateAbon(state, '/abon.json');
+    } catch (error) {
+        console.log(error);
+    };
 });
 
 app.get('/api/goods', async (request, response) => {
     const state = await getStateGoods();
 
-    response.send(state)
+    response.send(state);
 });
 
 app.post('/api/goods', (request, response) => {
     const state = request.body;
 
-    setStateGoods(state, '/goods.json')
+    try {
+        setStateGoods(state, '/goods.json');
+    } catch (error) {
+        console.log(error);
+    };
 });
 
 var port = process.env.PORT || 5000;
@@ -39,7 +47,11 @@ app.listen(port, function() {
 });
 
 async function getStateGoods() {
-    const state = await readFile(__dirname.concat('/goods.json'));
+    try {
+        const state = await readFile(__dirname.concat('/goods.json'));
+    } catch(err) {
+        console.log(err);
+    };
 
     return state;
 }
@@ -49,7 +61,11 @@ async function setStateGoods(data, path) {
 }
 
 async function getStateAbon() {
-    const state = await readFile(__dirname.concat('/abon.json'));
+    try {
+        const state = await readFile(__dirname.concat('/abon.json'));
+    } catch(err) {
+        console.log(err);
+    };
 
     return state;
 }
