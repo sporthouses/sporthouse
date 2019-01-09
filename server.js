@@ -7,7 +7,7 @@ app.use(express.logger());
 app.use(cors({origin: '*'}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/'));
 
 app.get('/api/abon', async (request, response) => {
     const state = await getStateAbon();
@@ -47,11 +47,7 @@ app.listen(port, function() {
 });
 
 async function getStateGoods() {
-    try {
-        const state = await readFile(__dirname.concat('/goods.json'));
-    } catch(err) {
-        console.log(err);
-    };
+    const state = await readFile(__dirname.concat('/goods.json'));
 
     return state;
 }
@@ -61,11 +57,7 @@ async function setStateGoods(data, path) {
 }
 
 async function getStateAbon() {
-    try {
-        const state = await readFile(__dirname.concat('/abon.json'));
-    } catch(err) {
-        console.log(err);
-    };
+    const state = await readFile(__dirname.concat('/abon.json'));
 
     return state;
 }
